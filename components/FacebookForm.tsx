@@ -8,6 +8,7 @@ import BottomBar from "./BottomBar";
 import AdDetailsType from "./facebook/AdDetails";
 import AdDetails from "./facebook/AdDetails";
 import { AudienceType, Budget } from "./facebook/typings";
+import { useRouter } from "next/router";
 const styles = {
   contentWrap: css({
     display: "flex",
@@ -59,7 +60,7 @@ export default class FacebookForm extends React.Component<{}, State> {
         )}
         {index === 1 && (
           <Audience
-            onChange={(key:string, value) =>
+            onChange={(key: string, value) =>
               this.setState({
                 audience: {
                   ...this.state.audience,
@@ -72,7 +73,7 @@ export default class FacebookForm extends React.Component<{}, State> {
         )}
         {index === 2 && (
           <AdDetails
-            onChange={(key:string, value) =>
+            onChange={(key: string, value) =>
               this.setState({
                 adDetails: {
                   ...this.state.adDetails,
@@ -84,7 +85,12 @@ export default class FacebookForm extends React.Component<{}, State> {
           />
         )}
         <BottomBar
-          onNext={() => this.setState({ index: index + 1 })}
+          onNext={() => {
+            index < 2 && this.setState({ index: index + 1 });
+            if (index === 2) {
+              window.location.replace("Facebook/campaigns");
+            }
+          }}
           onPrev={() => index > 0 && this.setState({ index: index - 1 })}
         />
       </div>

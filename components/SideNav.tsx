@@ -25,7 +25,7 @@ export default class SideNav extends React.Component<Props, State> {
    renderTab = (tabText: string, tabName: string, tabHref: string, onClose: () => void) => {
       return (
          <Link
-            href={tabHref === "Builder"?"/":tabHref.toLowerCase()}
+            href={tabHref==="Builder"?"/":tabHref}
             as={tabHref}
             key={tabText}
             className={cx(styles.eachTag, this.state.selected === tabName && styles.selectedTag)}
